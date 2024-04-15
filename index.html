@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jam Digital Menarik</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-uqd9lS3h40tM1nDOzB4NFl5h85MbJ3CzG40Cps72lILx8y2Tgq0dZAYeX96DqanMzXG5GK0eAMxZo3ZC0HpG/g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
+    body {
+      background-color: #1a202c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .clock-container {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 6rem;
+      padding: 20px;
+      border-radius: 10px;
+      animation: shadow-pulse 2s infinite alternate, glow 2s infinite alternate; /* Add shadow and glow animation */
+    }
+
+    @keyframes shadow-pulse {
+      from {
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+      }
+      to {
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8);
+      }
+    }
+
+    @keyframes glow {
+      from {
+        color: #f56565;
+        text-shadow: 0 0 10px #38a169, 0 0 20px #38a169, 0 0 40px #38a169, 0 0 60px #38a169; /* Text glow effect */
+      }
+      to {
+        color: #38a169;
+        text-shadow: 0 0 20px #f56565, 0 0 40px #f56565, 0 0 60px #f56565, 0 0 80px #f56565; /* Text glow effect */
+      }
+    }
+
+    .clock-container:hover {
+      transform: scale(1.05); /* Scale on hover */
+    }
+
+    .clock-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(255, 255, 255, 0.5); /* Background color for clock box */
+      border-radius: 10px; /* Rounded corners */
+      padding: 10px; /* Padding */
+    }
+
+    .clock-icon {
+      font-size: 2rem;
+      opacity: 0.7;
+      transition: opacity 0.2s ease, transform 0.2s ease; /* Add transition for opacity and transform */
+    }
+
+    .clock-container:hover .clock-icon {
+      opacity: 1; /* Increase opacity on hover */
+      transform: scale(1.2) rotate(15deg); /* Scale and rotate icon slightly on hover */
+    }
+
+    .text-change {
+      animation: changeColor 1s infinite alternate; /* Add animation for text color change */
+    }
+
+    .clock-number {
+      font-weight: bold; /* Make the numbers bold */
+      color: #f7fafc; /* Set text color */
+    }
+
+    @keyframes changeColor {
+      from {
+        color: #f7fafc; /* Start color */
+      }
+      to {
+        color: #f7fafc; /* End color */
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="clock" class="clock-container">
+    <div class="flex flex-row space-x-4">
+      <div class="clock-box">
+        <div id="hours" class="text-change clock-number"></div>
+        <div class="clock-icon"><i class="far fa-clock"></i></div>
+      </div>
+      <div class="clock-box">
+        <div id="minutes" class="text-change clock-number"></div>
+        <div class="clock-icon"><i class="far fa-clock"></i></div>
+      </div>
+      <div class="clock-box">
+        <div id="seconds" class="text-change clock-number"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0'); // Format jam dengan leading zero jika perlu
+      const minutes = String(now.getMinutes()).padStart(2, '0'); // Format menit dengan leading zero jika perlu
+      const seconds = String(now.getSeconds()).padStart(2, '0'); // Format detik dengan leading zero jika perlu
+
+      document.getElementById('hours').innerText = hours;
+      document.getElementById('minutes').innerText = minutes;
+      document.getElementById('seconds').innerText = seconds;
+    }
+
+    // Panggil fungsi updateClock() setiap detik
+    setInterval(updateClock, 1000);
+
+    // Pemanggilan pertama agar jam ditampilkan segera saat halaman dimuat
+    updateClock();
+  </script>
+</body>
+</html>
